@@ -1,0 +1,7 @@
+EmployeeID, FirstName,  LastName,  Department,      Email,                  Phone,
+101,         John,       Doe,       IT,         john.doe@example.com,     1234567890,
+102,         Jane,       Smith,     HR,         jane.smith@example.com,   9876543210,
+103,         Mike,       Brown,   Finance,      mike.brown@example.com,   5551234567,
+104,        Emily,       White,   Marketing,    emily.white@example.com,  4447891234,
+105,       Sofiya,       Syed,     Testing,      sofiya.syed@gmail.com,   8886468908,
+106,althaf-786,hussen,softerware deloveper,althaf.syed@gmail.com,8886468909,
