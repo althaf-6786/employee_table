@@ -33,6 +33,7 @@ export class EmployeeService {
     }
   }
 
+
   addEmployee = async (employee: any) => {
     try {
       const data = await fs.readFile(this.filePath, "utf8");
@@ -49,6 +50,7 @@ export class EmployeeService {
       throw error;
     }
   }
+
 
   updateEmployee = async (id: string, employee: any) => {
     try {
@@ -104,6 +106,7 @@ export class EmployeeService {
     }
   };
 
+
   deleteEmployee = async (id: string) => {
     try {
       const data = await fs.readFile(this.filePath, "utf8");
@@ -120,5 +123,17 @@ export class EmployeeService {
     } catch (error) {
       throw error;
     }
-  }
+  };
+
+  addMultipleEmployees = async (employees: any[]) => {
+    try {
+      for (const employee of employees) {
+        await this.addEmployee(employee);
+      }
+      return employees;
+    } catch (error) {
+      throw error;
+    }
+  };
+
 }

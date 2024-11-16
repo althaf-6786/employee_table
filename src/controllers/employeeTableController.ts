@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { EmployeeService } from "../services/employeTable";
+import { EmployeeService } from "../services/employeeTableServices";
 import NotFoundException from "../exceptions/notFoundException";
 import { ResponseHelper } from "../helpers/responseHelper";
 import { EMPLOYEE_ADDED_SUCCESS, EMPLOYEE_DELETED_SUCCESS, EMPLOYEE_FETCHED_SUCCESS, EMPLOYEE_NOT_FOUND } from "../constants/appMessages";
@@ -53,7 +53,6 @@ export class EmployeeController {
         throw new NotFoundException(EMPLOYEE_NOT_FOUND);
       }
 
-
       const employee = await employeeService.updateEmployee(id, data);
 
       return ResponseHelper.sendSuccessResponse(c, 200, EMPLOYEE_ADDED_SUCCESS, employee);
@@ -99,6 +98,21 @@ export class EmployeeController {
       await employeeService.deleteEmployee(id);
 
       return ResponseHelper.sendSuccessResponse(c, 200, EMPLOYEE_DELETED_SUCCESS);
+
+    } catch (error) {
+
+      throw error;
+    }
+  }
+
+
+  addMultipleEmployees = async (c: Context) => {
+    try {
+      const data = await c.req.json();
+
+      const employees = await employeeService.addMultipleEmployees(data);
+
+      return ResponseHelper.sendSuccessResponse(c, 201, EMPLOYEE_ADDED_SUCCESS, employees);
 
     } catch (error) {
 

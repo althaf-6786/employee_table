@@ -2,7 +2,7 @@ import { serve } from '@hono/node-server'
 import { Context, Hono } from 'hono'
 import * as dotenv from 'dotenv';
 import { DEF_ERROR_RESP } from './constants/appMessages';
-import employeeRouter from './router/employeTable';
+import employeeRouter from './router/employeeTableRouter';
 
 dotenv.config();
 
