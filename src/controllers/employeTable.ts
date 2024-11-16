@@ -6,7 +6,6 @@ import { EMPLOYEE_ADDED_SUCCESS, EMPLOYEE_DELETED_SUCCESS, EMPLOYEE_FETCHED_SUCC
 
 const employeeService = new EmployeeService();
 
-
 export class EmployeeController {
 
   getAllEmployees = async (c: Context) => {
