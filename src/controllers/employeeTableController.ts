@@ -5,10 +5,12 @@ import { ResponseHelper } from "../helpers/responseHelper";
 import { EMPLOYEE_ADDED_SUCCESS, EMPLOYEE_DELETED_SUCCESS, EMPLOYEE_FETCHED_SUCCESS, EMPLOYEE_NOT_FOUND } from "../constants/appMessages";
 import { PaginationHelper } from "../helpers/paginationHelper";
 import { SortingHelper } from "../helpers/sortingHelper";
+import { FilterHelper } from "../helpers/filterHelper";
 
 const employeeService = new EmployeeService();
 const sortingHelper = new SortingHelper();
 const paginationHelper = new PaginationHelper();
+const filterHelper = new FilterHelper();
 
 
 
@@ -23,16 +25,25 @@ export class EmployeeController {
       const sortOrder = c.req.query('sortOrder') || 'asc';
       const skip = (page - 1) * limit;
 
-      const employees = await employeeService.fetchAllEmployees();
+      // Extract filters from query parameters
+      const filters = {
+        search_string: c.req.query('search_string'),
+        department: c.req.query('department'),
+        email: c.req.query('email'),
+        phone: c.req.query('phone'),
+        lastName: c.req.query('lastName'),
+      };
 
-      if (employees.length === 0) {
-        throw new NotFoundException("No employees found");
+      const filteredEmployees = await filterHelper.filterEmployees(filters);
+
+      if (filteredEmployees.length === 0) {
+        throw new NotFoundException(EMPLOYEE_NOT_FOUND);
       }
 
-      const sortedData = sortingHelper.sortData(employees, sortColumn, sortOrder);
+      const sortedData = sortingHelper.sortData(filteredEmployees, sortColumn, sortOrder);
 
       const paginatedData = sortedData.slice(skip, skip + limit);
-      const totalCount = employees.length;
+      const totalCount = filteredEmployees.length;
 
       const response = await paginationHelper.getPaginationResponse({
         page,
@@ -40,6 +51,8 @@ export class EmployeeController {
         limit,
         skip,
         data: paginatedData,
+        message: EMPLOYEE_FETCHED_SUCCESS,
+        searchString: filters.search_string
       });
 
       return ResponseHelper.sendSuccessResponse(c, 200, EMPLOYEE_FETCHED_SUCCESS, response);
