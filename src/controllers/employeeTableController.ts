@@ -13,19 +13,18 @@ const paginationHelper = new PaginationHelper();
 const filterHelper = new FilterHelper();
 
 
-
 export class EmployeeController {
 
 
-  getAllEmployees = async (c: any) => {
+  getAllEmployees = async (c: Context) => {
     try {
+
       const page = +c.req.query('page')! || 1;
       const limit = +c.req.query('limit')! || 10;
       const sortColumn = c.req.query('sortColumn') || 'id';
       const sortOrder = c.req.query('sortOrder') || 'asc';
       const skip = (page - 1) * limit;
 
-      // Extract filters from query parameters
       const filters = {
         search_string: c.req.query('search_string'),
         department: c.req.query('department'),

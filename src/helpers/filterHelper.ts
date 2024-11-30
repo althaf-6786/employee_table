@@ -50,7 +50,6 @@ export class FilterHelper {
       );
     }
 
-
     if (filteredEmployees.length === 0) {
       throw new NotFoundException("No data found matching the filters");
     }
