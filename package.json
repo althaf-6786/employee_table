@@ -12,12 +12,15 @@
     "@antfu/eslint-config": "^5.4.1",
     "@hono/node-server": "^1.19.5",
     "drizzle-kit": "^0.31.5",
+    "drizzle-orm": "^0.44.6",
     "hono": "^4.9.12",
+    "pg": "^8.16.3",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@types/node": "^20.11.17",
+    "@types/pg": "^8.15.5",
     "eslint": "^9.37.0",
     "eslint-plugin-format": "^1.0.2",
     "globals": "^16.4.0",
