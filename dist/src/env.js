@@ -9,6 +9,7 @@ const VEnvSchema = object({
     DB_USER: string(),
     DB_PASSWORD: string(),
     DB_NAME: string(),
+    FIRE_CRAWL_API_KEY: string(),
 });
 // eslint-disable-next-line import/no-mutable-exports
 let envData;

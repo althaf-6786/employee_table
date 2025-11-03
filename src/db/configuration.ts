@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
+import fs from "node:fs";
 
 import { dbConfig } from "../config/dbConfig.js";
 
@@ -12,7 +13,8 @@ const dbClient = new Pool({
   password: dbConfig.password,
   database: dbConfig.database,
   ssl: {
-    rejectUnauthorized: false,
+    rejectUnauthorized: true,
+    ca: fs.readFileSync("./ca.pem").toString(),
   },
 });
 
